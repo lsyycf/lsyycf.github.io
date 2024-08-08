@@ -2,7 +2,7 @@ name: "lsyycf's blog"
 description: "lsyycf的个人技术博客"
 
 avatar: https://lsyycf.github.io/images/head.jpg
-favicon: https://pianfan.github.io/images/favicon.ico
+favicon: https://lsyycf.github.io/images/head.jpg
 
 navigation:
   - name: 首页
