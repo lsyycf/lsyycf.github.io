@@ -6,7 +6,8 @@ tags: [算法竞赛,字符串]
 comments: true
 author: lsyycf
 ---
-
+采用动态规划方法，用于求解一个字符串中的最长回文子串
+<!-- more -->
 ```
 #include <bits/stdc++.h>
 #define io cin.tie(0), cout.tie(0), ios::sync_with_stdio(false)
