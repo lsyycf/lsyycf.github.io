@@ -15,7 +15,7 @@ author: lsyycf
 #define ULL unsigned long long
 #define EPS 1e-8
 #define INF 0x7fffffff
-#define SUB 0x80000000
+#define SUB -INF - 1
 using namespace std;
 const int N = 1000002;
 int n, P[N << 1];
