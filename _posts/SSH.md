@@ -1,5 +1,13 @@
+---
+layout: post
+title: "SSH教程"
+date:   2024-10-23
+tags: [科研基础]
+comments: true
+author: lsyycf
+---
 SSH（Secure Shell）是一种安全协议，用于在不安全的网络上安全地访问计算机。它主要用于远程登录和远程命令执行。下面是SSH的详细使用指南，包括所有基本指令和使用示例。
-
+<!-- more -->
 ### 1. 安装SSH
 
 #### 在Linux上
