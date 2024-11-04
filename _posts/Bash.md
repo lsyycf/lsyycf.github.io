@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Bash教程"
+date:   2024-10-21
+tags: [科研基础]
+comments: true
+author: lsyycf
+---
 Bash 是一种用于类 Unix 操作系统的命令行解释器，通常用于编写脚本以自动化任务。Bash 脚本文件通常以 `.sh` 扩展名命名。以下是关于 Bash 批处理脚本的详细使用指南，包括创建、编写、执行脚本的步骤，以及常用的 Bash 指令和语法。
 
 ## 一、创建和编写 Bash 脚本
