@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Linux教程"
+date:   2024-10-22
+tags: [科研基础]
+comments: true
+author: lsyycf
+---
 在 Linux 中，命令行是与操作系统交互的主要方式。以下是一些常用的基本命令，详细介绍了它们的用法、选项和示例。
 
 ## 1. `ls` - 列出目录内容
