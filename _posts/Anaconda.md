@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Anaconda教程"
+date:   2024-10-20
+tags: [科研基础]
+comments: true
+author: lsyycf
+---
 Anaconda 是一个开源的 Python 和 R 数据科学平台，广泛用于科学计算、数据分析和机器学习。它包括了 Conda 包管理器，方便用户管理包和环境。以下是关于 Anaconda 的详细使用指南，包括安装、环境管理、包管理、常用指令等内容。
 
 ## 一、安装 Anaconda
