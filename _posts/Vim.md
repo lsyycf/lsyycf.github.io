@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Vim教程"
+date:   2024-10-23
+tags: [科研基础]
+comments: true
+author: lsyycf
+---
 下面是关于 Vim 编辑器的全面使用指南，涵盖了基础操作、高级功能、常用指令和配置等内容。这个指南将帮助你掌握 Vim 编辑器的所有重要方面。
 
 ## 一、Vim 概述
