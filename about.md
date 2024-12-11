@@ -12,5 +12,5 @@ permalink: /about/
 
 ## 友链
 
-- https://charactex.com/
+- [charactex.com](https://charactex.com)
 - 软件工程大佬，喜爱摄影、钢琴、古典乐的帅哥哥
