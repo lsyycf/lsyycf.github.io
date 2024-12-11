@@ -7,7 +7,7 @@ favicon: https://lsyycf.github.io/images/head.jpg
 navigation:
   - name: 首页
     url: /
-  - name: 关于
+  - name: 友链
     url: /about
   - name: 分类
     url: /tags
