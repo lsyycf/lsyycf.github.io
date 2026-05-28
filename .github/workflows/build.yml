@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-node@v4.0.1
       with:
         node-version: 20
+
+    - name: Check Markdown and LaTeX
+      run: node scripts/check-markdown-latex.js
         
     - run: npm install -g bats
     
