@@ -146,15 +146,41 @@ function splitTableRow(line) {
   return cells;
 }
 
-function checkTables(file, masked, errors) {
+function checkTables(file, original, masked, errors) {
+  const originalLines = original.split(/\r?\n/);
   const lines = masked.split(/\r?\n/);
   let table = null;
 
   lines.forEach((line, index) => {
-    if (!line.trimStart().startsWith('|')) {
+    const originalLine = originalLines[index] || '';
+    const isTableLine = /^\s*\|.*\|\s*$/.test(originalLine);
+    if (!isTableLine) {
+      if (table && line.trim() !== '') {
+        const next = index + 1 < lines.length ? lines[index + 1] : '';
+        const originalNext = index + 1 < originalLines.length ? originalLines[index + 1] : '';
+        if (originalLine.includes('|') || /^\s*\|.*\|\s*$/.test(originalNext)) {
+          errors.push({
+            file,
+            line: index + 1,
+            type: 'markdown-table',
+            message: 'possible hard-wrapped table row; each table row must stay on one physical line',
+          });
+        }
+      }
       table = null;
       return;
     }
+
+    const previous = index === 0 ? '' : originalLines[index - 1];
+    if (previous.trim() !== '' && !/^\s*\|.*\|\s*$/.test(previous)) {
+      errors.push({
+        file,
+        line: index + 1,
+        type: 'markdown-table',
+        message: 'table must be preceded by a blank line for Kramdown',
+      });
+    }
+
     const cells = splitTableRow(line);
     if (!table) table = { line: index + 1, width: cells.length };
     if (cells.length !== table.width) {
@@ -164,6 +190,25 @@ function checkTables(file, masked, errors) {
         type: 'markdown-table',
         message: `table row has ${cells.length} cells, expected ${table.width} from line ${table.line}`,
       });
+    }
+  });
+}
+
+function checkKramdownMathSpacing(file, masked, errors) {
+  const lines = masked.split(/\r?\n/);
+
+  lines.forEach((line, index) => {
+    if (/^\s*\$\$\s*$/.test(line)) {
+      const previous = index === 0 ? '' : lines[index - 1];
+      const next = index === lines.length - 1 ? '' : lines[index + 1];
+      if (previous.trim() !== '' || next.trim() !== '') {
+        errors.push({
+          file,
+          line: index + 1,
+          type: 'kramdown-math',
+          message: 'display math "$$" delimiter must be surrounded by blank lines',
+        });
+      }
     }
   });
 }
@@ -207,11 +252,21 @@ function extractTex(file, original, masked, errors) {
         continue;
       }
 
+      const source = original.slice(bodyStart, found);
+      if (!display && /^\s|\s$/.test(source)) {
+        errors.push({
+          file,
+          line: lineOf(masked, start),
+          type: 'kramdown-math',
+          message: 'inline math must not have spaces next to "$" delimiters',
+        });
+      }
+
       items.push({
         file,
         line: lineOf(masked, start),
         display,
-        source: original.slice(bodyStart, found),
+        source,
       });
       i = found + (display ? 2 : 1);
       continue;
@@ -397,7 +452,8 @@ function main() {
     const masked = maskCode(normalized);
 
     checkFrontMatter(file, normalized, errors);
-    checkTables(file, masked, errors);
+    checkTables(file, normalized, masked, errors);
+    checkKramdownMathSpacing(file, masked, errors);
     texItems.push(...extractTex(file, normalized, masked, errors));
   }
 
